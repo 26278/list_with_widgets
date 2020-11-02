@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:list_with_widgets/duck_page.dart';
 import 'package:list_with_widgets/gesture_detector_page.dart';
+import 'package:list_with_widgets/api.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -48,6 +49,21 @@ class FirstRoute extends StatelessWidget {
               ),
             ],
 
+          ),
+          Row(
+            children: <Widget> [
+              Text('Cat API'),
+              RaisedButton(
+                child: Text('Go to page'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ApiPage()),
+                  );
+                },
+              ),
+            ],
+
           )
       ]
       ),
@@ -66,4 +82,3 @@ Widget buildMyWidget(var name, double height){
       )
   );
 }
-
