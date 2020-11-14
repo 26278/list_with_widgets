@@ -22,31 +22,47 @@ class CatList extends StatelessWidget{
     return cat['breed'];
   }
 
-  String _gender(Map<dynamic, dynamic> cat){
-    if(cat['gender'] == 0){
-      return "male";
-    }
-    else {
-      return "female";
-    }
-  }
+  // String _gender(Map<dynamic, dynamic> cat){
+  //   if(cat['gender'] == 0){
+  //     return "male";
+  //   }
+  //   else {
+  //     return "female";
+  //   }
+  // }
 
+
+  /// I take the current time so that I can calculate the age.
+  /// I take the dob (date of birth) from the JSON array. that's a string.
+  /// Then I change the dob string into a time datatype.
+  /// I calculate the difference between now and the dob with the Duration difference function.
+  /// I calculate the difference to years, but that int still has decimals
+  /// I turn the years into a string and split the string at the dot.
+  /// Then I only choose the first int before the dot,
+  /// so that's basically the amount of years as how we humans see it.
+  /// Then I return the string with the text Age: x years
   String _age(Map<dynamic, dynamic> cat){
     var now = new DateTime.now();
-    var born = cat['age'];
+    var bornString = cat['dob'];
+    // print('The value of this is: $bornString');
+
+    var born = DateTime.parse(bornString);
     Duration difference = now.difference(born);
     var years = difference.inDays / 365;
-    print(years);
-    var age = toString(years);
+    // print(The value of this is $years);
 
-    return age;
+    var age = years.toString().split('.')[0];
+    var ageString = 'Age: $age years';
+
+    return ageString;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User List'),
+        title: Text('Cat List'),
+        backgroundColor: Colors.teal[400],
       ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
